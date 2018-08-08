@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>该二维码支持中文和LOGO</title>
+
+	<script type="text/javascript" src="js/jquery-1.11.1.js"></script>
+	<script type="text/javascript" src="js/utf.js"></script>
+	<script type="text/javascript" src="js/jquery.qrcode.js"></script>
+	<script type="text/javascript">
+		// $(document).ready(function() {  
+
+		//var ww=$("#ww").val()
+		var btn = function () {
+			$("#qrcodeCanvas").qrcode({
+				render: "canvas", //设置渲染方式，有table和canvas，使用canvas方式渲染性能相对来说比较好  
+				text: "编码：" + $("#ww").val() + "\n" + "编码：" + $("#ww1").val(), //扫描二维码后显示的内容,可以直接填一个网址，扫描二维码后自动跳向该链接  
+				width: "400", //二维码的宽度  
+				height: "400", //二维码的高度  
+				background: "#ffffff", //二维码的后景色  
+				foreground: "#000000", //二维码的前景色  
+				src: 'img/3.png' //二维码中间的图片  
+			});
+		}
+
+		// });
+	</script>
+
+</head>
+
+<body>
+	<center>
+		<h2>该二维码支持中文和LOGO</h2>
+
+		<div id="" style="float: left;">
+			编码：
+			<input id="ww" type="text" /><br/>
+			编码：
+			<input id="ww1" type="text" /><br/>
+			<input type="button" name="" id="btn" onclick="btn()" value="点击生成" style="width: 150px;height: 50px;border: none;" />
+		</div>
+		
+
+
+		<div id="qrcodeCanvas" style="float: left;"></div>
+	</center>
+</body>
+
+</html>
