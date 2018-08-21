@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>该二维码支持中文和LOGO</title>
+
+		<script type="text/javascript" src="js/jquery-1.11.1.js"></script>
+		<script type="text/javascript" src="js/utf.js"></script>
+		<script type="text/javascript" src="js/jquery.qrcode.js"></script>
+		<script type="text/javascript" src="js/jquery.jqprint-0.3.js"></script>
+		<script type="text/javascript" src="js/html2canvas.js"></script>
+		<script type="text/javascript">
+			
+			//获取参数，生成二维码
+			$(document).ready(function() {
+				var str = window.location.href; //取得整个地址栏
+				var num = str.indexOf("?")
+				str = str.substr(num + 1);
+				console.log(str); //id=1?nsme=2?ns=3
+				str = str.split('?');
+				console.log(str);
+				var e = str[0].split('=');
+				console.log(e);
+				var e1 = str[1].split('=');
+				var e2 = str[2].split('=');
+				//var qwe = e[1];
+				var qwe = decodeURI(e[1]);
+				var qwe1 = decodeURI(e1[1]);
+				var qwe2 = decodeURI(e2[1]);
+
+				$("#code1").html(qwe);
+				$("#code2").html(qwe1);
+				$("#code3").html(qwe2);
+
+				$("#qrcodeCanvas").qrcode({
+					render: "canvas", //设置渲染方式，有table和canvas，使用canvas方式渲染性能相对来说比较好  
+					text: "编码1：" + qwe + "\n" + "编码2：" + qwe1 + "\n" + "编码3：" + qwe2, //扫描二维码后显示的内容,可以直接填一个网址，扫描二维码后自动跳向该链接  
+					width: "400", //二维码的宽度  
+					height: "400", //二维码的高度  
+					background: "#ffffff", //二维码的后景色  
+					foreground: "#000000", //二维码的前景色  
+					src: 'img/3.png' //二维码中间的图片  
+				});
+
+			});
+
+
+			//将二维码及说明信息生成图片并保存
+			function printPhoto() {
+				
+				html2canvas(document.getElementById("imgBox"),{
+				    onrendered: function(canvas) {
+				    	var imgURL = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+				    	
+				    	var saveFile = function(data, filename){
+							var save_link = document.createElementNS('http://www.w3.org/1999/xhtml', 'a');
+							save_link.href = data;
+							save_link.download = filename;
+							var event = document.createEvent('MouseEvents');
+							event.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false,    false, false, 0, null);
+							save_link.dispatchEvent(event);
+						}
+						
+						saveFile(imgURL,'filename.png');
+				    	
+				    }
+				});
+				
+			}
+		</script>
+
+	</head>
+
+	<body>
+		<center id="imgBox" style="width: 800px;height: 600px;border: 1px solid;">
+			
+			<div id="" style="float: left;">
+				编码1：
+				<span id="code1"></span> <br /> 
+				编码2：
+				<span id="code2"></span><br /> 
+				编码3：
+				<span id="code3"></span><br />
+
+			</div>
+			<div id="qrcodeCanvas" style="float: left;width: 500px;height: 500px;">
+
+			</div>
+		</center>
+		<input type="button" id="btns" onclick="printPhoto(imgBox)" value="点击下载" />
+	</body>
+
+</html>

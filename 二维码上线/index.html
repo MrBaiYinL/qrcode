@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>二维码生成页面</title>
+		<!--<script type="text/javascript" src="./js/qrcode.js"></script>-->
+		<script type="text/javascript" src="js/jquery-1.11.1.js"></script>
+	</head>
+
+	<style>
+		body {
+			font-family: "Microsoft Yahei";
+			text-align: center;
+		}
+		
+		#h2 {
+			font-size: 34px;
+			color: #0b73cc;
+			margin-top: 20px;
+			cursor: default;
+			margin-bottom: 0;
+		}
+		
+		#span {
+			font-size: 12px;
+			color: grey;
+			font-weight: normal;
+			margin-left: 10px;
+		}
+		
+		#p {
+			font-size: 13px;
+			color: grey;
+			margin-top: 0;
+			margin-bottom: 50px;
+		}
+	</style>
+
+	<body>
+		<h2 id="h2">二维码生成</h2>
+		<br>
+		<span id="span">一键生成二维码扫码轻松了解信息</span>
+		<p id="p">Generate QR code by one key to access to information.</p>
+
+		<br><br><br>
+		<div style="margin:20px 0;width: 90%;height: 400px;margin: auto">
+			<div class="easyui-panel" style="margin-top: 5px; height: 100%;border:hidden">
+				名称：<input type="text" name="textbox1" style="margin: 0px; padding-top: 0px; padding-bottom: 0px; height: 22px; line-height: 22px; width: 140.4px;"> 功能位号：
+				<input type="text" name="textbox2" placeholder="普通输入框"> 资产号：
+				<input type="text" name="textbox3" placeholder="普通输入框">
+				<!-- 设备号：<input type="text" name="textbox4" placeholder="普通输入框"> -->
+
+				<button type="button" onclick="print()">点击生成</button>
+
+			</div>
+		</div>
+	</body>
+	<script>
+		
+//		var str=window.location.href; //取得整个地址栏
+//	    var num=str.indexOf("?")
+//	    str=str.substr(num+1);
+//		console.log(str);//id=1?nsme=2?ns=3
+//		str=str.split('?');console.log(str);
+//		var e = str[0].split('=');console.log(e);
+//		var e1 = str[1].split('=');
+//		var e2 = str[2].split('=');
+//		var qwe = e[1];
+//		var qwe1 = e1[1];
+//		var qwe2 = e2[1];
+		
+		
+		function print() {
+			var textbox1 = $('input[name="textbox1"]').val();
+			var textbox2 = $('input[name="textbox2"]').val();
+			var textbox3 = $('input[name="textbox3"]').val();
+			if(!textbox1) {
+				alert("待生成的页面不能为空");
+			} else {
+				var symHref = 'final.html?id=' + textbox1 + "?nsme=" + textbox2 + '?ns=' + textbox3;
+				window.open(symHref);
+			}
+
+		}
+	</script>
+
+</html>
